@@ -36,28 +36,18 @@ public class DogsController : ControllerBase
     public IActionResult GetDogs(string? attribute = "", bool? orderByDesc = false, int pageNumber = 1, int pageSize = 2)
     {
         IQueryable<Dog> dogs;
-
-        if (!string.IsNullOrEmpty(attribute))
+        try
         {
-            try
-            {
-                dogs = orderByDesc == true
-                    ? _dogs.OrderDogsByAttribute(attribute, Order.desc)
-                    : _dogs.OrderDogsByAttribute(attribute, Order.asc);
-                var paginatedDogs = _dogs.Paginate(dogs, pageNumber, pageSize);
-                return Ok(paginatedDogs);
-            }
-            catch(InvalidOperationException ex)
-            {
-                return BadRequest("Invalid attribute");
-            } 
-        }
-        else
-        {
-            dogs = _dogs.GetAll();
+            dogs = orderByDesc == true
+                ? _dogs.OrderDogsByAttribute(attribute, Order.desc)
+                : _dogs.OrderDogsByAttribute(attribute, Order.asc);
             var paginatedDogs = _dogs.Paginate(dogs, pageNumber, pageSize);
             return Ok(paginatedDogs);
         }
+        catch(InvalidOperationException ex)
+        {
+            return BadRequest("Invalid attribute");
+        } 
     }
 
     [HttpPost]
