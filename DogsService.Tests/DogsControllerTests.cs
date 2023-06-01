@@ -2,12 +2,8 @@
 using CodeBridge.Models.DTOs.In;
 using CodeBridge.Models.Entities;
 using CodeBridge.Repositories.DogRepository;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 
 namespace DogsService.Tests;
 
