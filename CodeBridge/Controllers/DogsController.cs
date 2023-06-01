@@ -41,14 +41,9 @@ public class DogsController : ControllerBase
         {
             try
             {
-                if (orderByDesc == true)
-                {
-                    dogs = _dogs.OrderDogsByAttribute(attribute, Order.desc);
-                }
-                else
-                {
-                    dogs = _dogs.OrderDogsByAttribute(attribute, Order.asc);
-                }
+                dogs = orderByDesc == true
+                    ? _dogs.OrderDogsByAttribute(attribute, Order.desc)
+                    : _dogs.OrderDogsByAttribute(attribute, Order.asc);
                 var paginatedDogs = _dogs.Paginate(dogs, pageNumber, pageSize);
                 return Ok(paginatedDogs);
             }

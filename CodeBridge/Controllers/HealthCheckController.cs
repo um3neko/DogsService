@@ -11,7 +11,6 @@ public class HealthCheckController : ControllerBase
     [HttpGet]
     public IActionResult Ping()
     {
-        var response = $"{AssemblyHelper.GetAssemblyName()}. Version {AssemblyHelper.GetAssemblyVersion()}";
-        return Ok(response);
+        return Ok($"{AssemblyHelper.GetAssemblyName()}. Version {AssemblyHelper.GetAssemblyVersion()}");
     }
 }

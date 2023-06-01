@@ -33,8 +33,8 @@ public class DogRepository : IDogRepository
 
     public async Task<int> DogsCount()
     {
-        var count = await _dogContext.Dogs.CountAsync();
-        return count;
+        return await _dogContext.Dogs.CountAsync();
+         
     }
 
     public IQueryable<Dog> OrderDogsByAttribute(string attribute, Order order)
@@ -45,6 +45,7 @@ public class DogRepository : IDogRepository
             "color" => order == Order.desc ? _dogContext.Dogs.OrderByDescending(d => d.Color) : _dogContext.Dogs.OrderBy(d => d.Color),
             "tail_length" => order == Order.desc ? _dogContext.Dogs.OrderByDescending(d => d.TailLength) : _dogContext.Dogs.OrderBy(d => d.TailLength),
             "weigth" => order == Order.desc ? _dogContext.Dogs.OrderByDescending(d => d.Weight) : _dogContext.Dogs.OrderBy(d => d.Weight),
+            "" => GetAll(),
             _ => throw new InvalidOperationException("Invalid attribute for sorting")
         };
         return dogs;
